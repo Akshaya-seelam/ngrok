@@ -1,0 +1,51 @@
+Minikube
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-installer.exe
+.\minikube-installer.exe
+
+minikube start --driver=docker
+
+kubectl create deployment mynginx --image=nginx
+
+kubectl get pods
+kubectl get deployments
+kubectl describe pods
+
+kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80
+kubectl get service mynginx
+
+kubectl scale deployment mynginx --replicas=4
+
+kubectl port-forward svc/mynginx 8081:80
+http://localhost:8081
+
+minikube dashboard
+kubectl delete deployment mynginx
+kubectl delete service mynginx
+minikube stop
+minikube delete
+
+
+Nagios
+docker pull jasonrivers/nagios:latest
+docker run --name nagiosdemo -p 8888:80 jasonrivers/nagios:latest
+http://localhost:8888
+Username: nagiosadmin
+Password: nagios
+docker stop nagiosdemo
+docker rm nagiosdemo
+docker rmi jasonrivers/nagios:latest
+
+AWS
+Create instance , take the ssh command, paste in terminal
+sudo apt update
+sudo apt-get install docker.io
+sudo apt install git
+sudo apt install nano
+clone
+cd 
+sudo docker build -t img1 .
+sudo docker run -d -p 8000:80 img1
+
+dockerfile
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
